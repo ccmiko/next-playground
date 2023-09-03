@@ -3,20 +3,21 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+type Props = {
+  csrfToken: string;
+};
 type InitData = { [key: string]: string };
-const storageKeys = ["text", "textarea", "csrfToken"];
+const storageKeys = ["text", "textarea"];
 const keyLabels: InitData = {
   text: "テキスト",
   textarea: "テキストエリア",
-  csrfToken: "CSRFトークン",
 };
 const initData: InitData = {
   text: "",
   textarea: "",
-  csrfToken: "",
 };
 
-export default function CsrfFormConfirm() {
+export default function CsrfFormConfirm({ csrfToken }: Props) {
   const router = useRouter();
   const [data, setData] = useState(initData);
   useEffect(() => {
@@ -36,6 +37,9 @@ export default function CsrfFormConfirm() {
     try {
       const response = await fetch("/api/", {
         method: "POST",
+        headers: {
+          "X-CSRF-Token": csrfToken,
+        },
         body: JSON.stringify(data),
       });
       console.debug(await response.json());
