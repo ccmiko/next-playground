@@ -1,16 +1,23 @@
 "use client";
 
+import { headers } from "next/headers";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
+
+type Props = {
+  csrfToken: string;
+};
 
 const initFormData = {
   text: "",
   textarea: "",
+  csrfToken: "",
 };
 
-export default function Form() {
+export default function CsrfForm({ csrfToken }: Props) {
   useEffect(() => {
     window.sessionStorage.clear();
+    setFormData({ ...formData, csrfToken: csrfToken });
   }, []);
 
   const [formData, setFormData] = useState(initFormData);
@@ -33,7 +40,7 @@ export default function Form() {
     if (inValid) {
       return;
     }
-    router.push("/form/confirm");
+    router.push("/has-csrf-token-form/confirm");
   }
 
   return (
@@ -46,6 +53,7 @@ export default function Form() {
           <h2 className="text-center font-bold">Form</h2>
         </div>
         <div className="body mt-2 mb-2">
+          <input type="hidden" value={formData.csrfToken} />
           <input
             type="text"
             name="text"

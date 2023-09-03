@@ -4,17 +4,19 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type InitData = { [key: string]: string };
-const storageKeys = ["text", "textarea"];
+const storageKeys = ["text", "textarea", "csrfToken"];
 const keyLabels: InitData = {
   text: "テキスト",
   textarea: "テキストエリア",
+  csrfToken: "CSRFトークン",
 };
 const initData: InitData = {
   text: "",
   textarea: "",
+  csrfToken: "",
 };
 
-export default function FormConfirm() {
+export default function CsrfFormConfirm() {
   const router = useRouter();
   const [data, setData] = useState(initData);
   useEffect(() => {
