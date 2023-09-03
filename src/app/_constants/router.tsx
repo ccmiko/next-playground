@@ -7,4 +7,8 @@ export const ROUTER = [
     name: "Form",
     path: "/form",
   },
+  {
+    name: "CsrfForm",
+    path: "/has-csrf-token-form",
+  },
 ];

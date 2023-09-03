@@ -8,7 +8,7 @@ const initFormData = {
   textarea: "",
 };
 
-export default function Form() {
+export default function CsrfForm() {
   useEffect(() => {
     window.sessionStorage.clear();
   }, []);
@@ -33,7 +33,7 @@ export default function Form() {
     if (inValid) {
       return;
     }
-    router.push("/form/confirm");
+    router.push("/has-csrf-token-form/confirm");
   }
 
   return (

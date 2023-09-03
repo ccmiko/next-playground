@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const styles: CSSProperties = {
-    minWidth: 1000,
+    minWidth: 300,
   };
   return (
     <html lang="ja">
